@@ -73,7 +73,8 @@ function addProduct() {
             image: iphoto.value,
         }),
     }).then(() => {
-        updateProductList(); 
+        updateProductList()
+        location.reload(); 
     }).catch(error => console.error('Add xatolik:', error));
 }
 
@@ -81,7 +82,6 @@ fetch("https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar")
     .then(res => res.json())
     .then(res => showFront(res))
     .catch(error => console.error('Initial fetch xatolik:', error));
-
 ibutton.addEventListener("click", addProduct);
 
 updateProductList();
