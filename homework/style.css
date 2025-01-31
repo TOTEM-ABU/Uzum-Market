@@ -1,19 +1,13 @@
-*{
-    margin:0;
-    padding: 0;
-    box-sizing: border-box;
+.card {
+    background-color: #f4f4f4; /* Orqa fon rangini qo'yish */
+    padding: 20px; /* Ichki bo'shliq */
+    margin: 10px; /* Kartalar orasida bo'shliq */
+    border-radius: 10px; /* Yoyilgan burchaklar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soyani qo'shish */
+    width: calc(33.33% - 20px);
+    display: inline-block; 
 }
-
-.root{
-    display: flex;
-    flex-wrap: wrap;
-
-}
-.card{
-    background-color: cyan;
-    width: 25%;
-}
-.card img{
-    max-width: 100%;
-    border-radius: 20px;
+.card img {
+    max-width: 100%; /* Rasmni kenglikka moslashtirish */
+    border-radius: 10px;
 }

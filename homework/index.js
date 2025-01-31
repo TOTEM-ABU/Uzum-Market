@@ -6,46 +6,24 @@ let icolor = document.querySelector("#color");
 let iphoto = document.querySelector("#image");
 let ibutton = document.querySelector("#create");
 
-function showFront(data){
-    data.forEach(e => {
-        tovar.insertAdjacentHTML("beforeend",`
-            <div class="card"
-            <h1>${e.name}</h1>
-            <h3>${e.price}</h3>
-            <img src="${e.image}" alt="Rasm bor edi"> 
-            </div>  
-        `)
-    });
-    
-}
-
 function showFront(data) {
+    tovar.innerHTML = ''; 
     data.forEach(e => {
         tovar.insertAdjacentHTML("beforeend", `
-            <h1>${e.name}</h1>
-            <h3>${e.price}</h3>
-            <img src="${e.image}" alt="${e.name}">   
+            <div class="card">
+                <h1>${e.name}</h1>
+                <h3>${e.price}</h3>
+                <img src="${e.image}" alt="${e.name}">   
+            </div>
         `);
     });
 }
 
-function output(products) {
-    all.innerHTML = ''; 
-    products.forEach(e => {
-        all.insertAdjacentHTML("beforeend", `
-            <div class="card">
-                <h1>${e.name}</h1>
-                <p>${e.color}</p>
-                <p>${e.price}</p>
-                <img src="${e.image}" alt="">
-                <button class="delete" data-id="${e.id}">Delete</button>
-            </div>    
-        `);
-    });
-
-    document.querySelectorAll('.delete').forEach(button => {
-        button.addEventListener('click', deleteProduct);
-    });
+function updateProductList() {
+    fetch("https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar")
+        .then(res => res.json())
+        .then(res => showFront(res))  
+        .catch(error => console.error('Error fetching products:', error));
 }
 
 function deleteProduct(event) {
@@ -54,7 +32,7 @@ function deleteProduct(event) {
         method: "DELETE",
     }).then(() => {
         updateProductList(); 
-    }).catch(error => console.error('Delete xatolik:', error));
+    }).catch(error => console.error('Delete error:', error));
 }
 
 function addProduct() {
@@ -65,7 +43,9 @@ function addProduct() {
 
     fetch("https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
             name: iname.value,
             price: iprice.value,
@@ -73,14 +53,14 @@ function addProduct() {
             image: iphoto.value,
         }),
     }).then(() => {
-        updateProductList(); 
-    }).catch(error => console.error('Add xatolik:', error));
+        updateProductList();
+    }).catch(error => console.error('Add product error:', error));
 }
 
 fetch("https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar")
     .then(res => res.json())
-    .then(res => showFront(res))
-    .catch(error => console.error('Initial fetch xatolik:', error));
+    .then(res => showFront(res)) 
+    .catch(error => console.error('Initial fetch error:', error));
 
 ibutton.addEventListener("click", addProduct);
 
