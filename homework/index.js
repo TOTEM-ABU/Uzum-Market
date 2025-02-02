@@ -42,30 +42,6 @@ function deleteProduct(event) {
     }).catch(error => console.error('Delete error:', error));
 }
 
-function addProduct() {
-    if (!iname.value || !iprice.value || !icolor.value || !iphoto.value) {
-        alert("Iltimos, barcha maydonlarni to'ldiring.");
-        return;
-    }
-
-    fetch("https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            name: iname.value,
-            price: iprice.value,
-            color: icolor.value,
-            image: iphoto.value,
-        }),
-    })
-    .then(() => {
-        updateProductList();
-        location.reload(); 
-    })
-    .catch(error => console.error('Add product error:', error));
-}
 
 fetch("https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar")
     .then(res => res.json())
