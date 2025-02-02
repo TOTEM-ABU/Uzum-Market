@@ -19,7 +19,6 @@ function showFront(data) {
         `);
     });
 
-    // Har bir o‘chirish tugmasiga event qo‘shish
     document.querySelectorAll(".delete-btn").forEach(btn => {
         btn.addEventListener("click", deleteProduct);
     });
@@ -68,7 +67,6 @@ function addProduct() {
     .catch(error => console.error('Add product error:', error));
 }
 
-// Dastlabki yuklash
 fetch("https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar")
     .then(res => res.json())
     .then(res => showFront(res)) 
