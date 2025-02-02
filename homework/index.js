@@ -1,21 +1,20 @@
 let tovar = document.querySelector(".Tovarlar");
 let all = document.querySelector(".all");
-
-function loadLocalStorageData() {
-    let savedProducts = JSON.parse(localStorage.getItem("products")) || [];
-    showFront(savedProducts);
-}
+let iname = document.querySelector("#name");
+let iprice = document.querySelector("#price");
+let icolor = document.querySelector("#color");
+let iphoto = document.querySelector("#image");
+let ibutton = document.querySelector("#create");
 
 function showFront(data) {
     tovar.innerHTML = ''; 
-    data.forEach((e, index) => {
+    data.forEach(e => {
         tovar.insertAdjacentHTML("beforeend", `
-            <div class="card" data-id="${index}">
+            <div class="card" data-id="${e.id}">
                 <h1>${e.name}</h1>
                 <h3>${e.price}</h3>
-                <p>Color: ${e.color}</p>
-                <img src="${e.image}" alt="${e.name}" width="100">
-                <button class="delete-btn" data-id="${index}">O'chirish</button>
+                <img src="${e.image}" alt="${e.name}">
+                <button class="delete-btn" data-id="${e.id}">O'chirish</button>
             </div>
         `);
     });
@@ -25,12 +24,29 @@ function showFront(data) {
     });
 }
 
-function deleteProduct(event) {
-    let id = event.target.getAttribute('data-id');
-    let savedProducts = JSON.parse(localStorage.getItem("products")) || [];
-    savedProducts.splice(id, 1);
-    localStorage.setItem("products", JSON.stringify(savedProducts));
-    loadLocalStorageData();
+function updateProductList() {
+    fetch("https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar")
+        .then(res => res.json())
+        .then(res => showFront(res))  
+        .catch(error => console.error('Error fetching products:', error));
 }
 
-document.addEventListener("DOMContentLoaded", loadLocalStorageData);
+function deleteProduct(event) {
+    let id = event.target.getAttribute('data-id');
+    if (!id) return;
+
+    fetch(`https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar/${id}`, {
+        method: "DELETE",
+    }).then(() => {
+        updateProductList(); 
+    }).catch(error => console.error('Delete error:', error));
+}
+
+
+fetch("https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar")
+    .then(res => res.json())
+    .then(res => showFront(res)) 
+    .catch(error => console.error('Initial fetch error:', error));
+
+ibutton.addEventListener("click", addProduct);
+updateProductList();
