@@ -25,7 +25,7 @@ function showFront(data) {
 }
 
 function updateProductList() {
-    fetch("https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar")
+    fetch("https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar")
         .then(res => res.json())
         .then(res => showFront(res))  
         .catch(error => console.error('Error fetching products:', error));
@@ -35,7 +35,7 @@ function deleteProduct(event) {
     let id = event.target.getAttribute('data-id');
     if (!id) return;
 
-    fetch(`https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar/${id}`, {
+    fetch(`https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar/${id}`, {
         method: "DELETE",
     }).then(() => {
         updateProductList(); 
@@ -48,7 +48,7 @@ function addProduct() {
         return;
     }
 
-    fetch("https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar", {
+    fetch("https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -67,11 +67,10 @@ function addProduct() {
     .catch(error => console.error('Add product error:', error));
 }
 
-fetch("https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar")
+fetch("https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar")
     .then(res => res.json())
     .then(res => showFront(res)) 
     .catch(error => console.error('Initial fetch error:', error));
 
 ibutton.addEventListener("click", addProduct);
-
 updateProductList();
