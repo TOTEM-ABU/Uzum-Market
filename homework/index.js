@@ -10,12 +10,18 @@ function showFront(data) {
     tovar.innerHTML = ''; 
     data.forEach(e => {
         tovar.insertAdjacentHTML("beforeend", `
-            <div class="card">
+            <div class="card" data-id="${e.id}">
                 <h1>${e.name}</h1>
                 <h3>${e.price}</h3>
-                <img src="${e.image}" alt="${e.name}">   
+                <img src="${e.image}" alt="${e.name}">
+                <button class="delete-btn" data-id="${e.id}">O'chirish</button>
             </div>
         `);
+    });
+
+    // Har bir o‘chirish tugmasiga event qo‘shish
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", deleteProduct);
     });
 }
 
@@ -28,6 +34,8 @@ function updateProductList() {
 
 function deleteProduct(event) {
     let id = event.target.getAttribute('data-id');
+    if (!id) return;
+
     fetch(`https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar/${id}`, {
         method: "DELETE",
     }).then(() => {
@@ -52,11 +60,15 @@ function addProduct() {
             color: icolor.value,
             image: iphoto.value,
         }),
-    }).then(() => {
+    })
+    .then(() => {
         updateProductList();
-    }).catch(error => console.error('Add product error:', error));
+        location.reload(); 
+    })
+    .catch(error => console.error('Add product error:', error));
 }
 
+// Dastlabki yuklash
 fetch("https://679a6524747b09cdcccebe3e.mockapi.io/Tovarlar")
     .then(res => res.json())
     .then(res => showFront(res)) 
