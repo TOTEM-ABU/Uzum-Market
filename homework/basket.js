@@ -21,7 +21,7 @@ function showData(arr) {
 
 function delProduct(id) {
     let basket = JSON.parse(localStorage.getItem("basket")) || [];
-    let filtered = basket.filter((p) => p.id !== id);
+    let filtered = basket.filter((p) => p.id != id);
     localStorage.setItem("basket", JSON.stringify(filtered));
     location.reload();
 }
