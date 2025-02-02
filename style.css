@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.box {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    gap: 20px;
+    border: 3px solid;
+    background-color: aqua;
+}
+
+.button {
+    padding: 10px;
+}
+
+.all {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 80px;
+    margin-top: 50px;
+}
+
+.card {
+    width: 200px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+    background-color: lightcoral;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 50px;
+}
+
+.delete {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.delete:hover {
+    background-color: darkred;
+}
+body {
+    background-image: url(https://www.thecityofldn.com/wp-content/uploads/2023/04/Leadenhall-65-Luisa-Tona-reduced-2000x1335.jpg);
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed;
+    margin: 0;
+}
+
