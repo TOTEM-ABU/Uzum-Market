@@ -1,13 +1,13 @@
 .card {
-    background-color: #f4f4f4; /* Orqa fon rangini qo'yish */
-    padding: 20px; /* Ichki bo'shliq */
-    margin: 10px; /* Kartalar orasida bo'shliq */
-    border-radius: 10px; /* Yoyilgan burchaklar */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soyani qo'shish */
+    background-color: #f4f4f4;
+    padding: 20px; 
+    margin: 10px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     width: calc(33.33% - 20px);
     display: inline-block; 
 }
 .card img {
-    max-width: 100%; /* Rasmni kenglikka moslashtirish */
+    max-width: 100%;
     border-radius: 10px;
 }
