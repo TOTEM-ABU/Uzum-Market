@@ -1,13 +1,144 @@
-.card {
-    background-color: #f4f4f4;
-    padding: 20px; 
-    margin: 10px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    width: calc(33.33% - 20px);
-    display: inline-block; 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+#toCreate {
+    margin-top: 20px;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#toCreate:hover {
+    background-color: #45a049;
+}
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 600px;
+    margin-top: 40px;
+}
+
+.button {
+    padding: 12px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 48%;
+    font-size: 16px;
+}
+
+#name {
+    background-color: #fff;
+}
+
+#name:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+#create {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 48%;
+}
+
+#create:hover {
+    background-color: #45a049;
+}
+
+.Tovarlar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
 .card img {
-    max-width: 10%;
-    border-radius: 10px;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card h1 {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #333;
+}
+
+.card h3 {
+    font-size: 16px;
+    color: #888;
+}
+
+.delete-btn {
+    margin-top: 10px;
+    background-color: #FF6347;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #FF4500;
+}
+
+#button {
+    margin-top: 20px;
+}
+
+#button a {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#button a:hover {
+    background-color: #0056b3;
 }
