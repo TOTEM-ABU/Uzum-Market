@@ -1,5 +1,4 @@
 let tovar = document.querySelector(".Tovarlar");
-let all = document.querySelector(".all");
 let iname = document.querySelector("#name");
 let iprice = document.querySelector("#price");
 let icolor = document.querySelector("#color");
@@ -22,6 +21,10 @@ function showFront(data) {
     document.querySelectorAll(".delete-btn").forEach(btn => {
         btn.addEventListener("click", deleteProduct);
     });
+    
+    document.querySelectorAll(".card").forEach(card => {
+        card.addEventListener("dblclick", editProduct);
+    });
 }
 
 function updateProductList() {
@@ -42,11 +45,66 @@ function deleteProduct(event) {
     }).catch(error => console.error('Delete error:', error));
 }
 
-
-fetch("https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar")
-    .then(res => res.json())
-    .then(res => showFront(res)) 
-    .catch(error => console.error('Initial fetch error:', error));
-
 ibutton.addEventListener("click", addProduct);
+function addProduct() {
+    let name = iname.value;
+    let price = iprice.value;
+    let color = icolor.value;
+    let image = iphoto.value;
+
+    if (!name || !price || !color || !image) {
+        alert("Please fill in all fields");
+        return;
+    }
+
+    let newProduct = {
+        name: name,
+        price: price,
+        color: color,
+        image: image
+    };
+
+    fetch("https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newProduct)
+    }).then(() => {
+        updateProductList();
+    }).catch(error => console.error('Add product error:', error));
+}
+
+function editProduct(event) {
+    let id = event.currentTarget.getAttribute('data-id');
+    if (!id) return;
+
+    let name = prompt("Enter new name:");
+    let price = prompt("Enter new price:");
+    let color = prompt("Enter new color:");
+    let image = prompt("Enter new image URL:");
+
+    if (!name || !price || !color || !image) {
+        alert("Please fill in all fields");
+        return;
+    }
+
+    let updatedProduct = {
+        name: name,
+        price: price,
+        color: color,
+        image: image
+    };
+
+    fetch(`https://679a6524747b09cdcccebe3e.mockapi.io/tovarlar/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedProduct)
+    }).then(() => {
+        updateProductList();
+    }).catch(error => console.error('Edit product error:', error));
+}
+
 updateProductList();
